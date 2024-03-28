@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+   <head>
+      <script src="../js/jquery.min.js"></script>
+      <script src="../js/popper.min.js"></script>
+      <script src="../js/bootstrap.min.js"></script>
+      <script src="../js/FileSaver.min.js"></script>
+      <script src="../js/bootstrap-multiselect.js"></script>
+      <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
+      <!-- <link rel="stylesheet" type="text/css" href="../css/bootstrap-multiselect.min.css"/> -->
+      <link rel="stylesheet" type="text/css" href="../css/bootstrap-multiselect.css"/>
+      <link rel="stylesheet" type="text/css" href="../css/popup.css"/>
+   </head>
+   <body style="width: 400px">
+      <div class="container">
+         <div class="sub-container login">
+            <form class="gp-login" style="margin-bottom: 52px;" name="user_login" action="javascript:void();">
+               <div class="row">
+                  <img class="logo-image" src="../images/ext_logo.png">
+               </div>
+               <div class="form-group">
+                  <label for="user-email">Email address</label>
+                  <input name="user_email" type="email" class="form-control" id="user-email" aria-describedby="emailHelp" placeholder="Enter email" value="">
+               </div>
+               <div class="form-group">
+                  <label for="password">Password</label>
+                  <input name="user_password" type="password" class="form-control" id="password" placeholder="Password" value="">
+               </div>
+               <label class="invalid-error invalid-credentials">Invalid credentials. Please try again.</label>
+               <div class="row">
+                  <div class="col-6">
+                     <button type="submit" class="btn btn-outline-primary login-gp-btn login-btns">Login</button>
+                  </div>
+                  <div class="col-6">
+                     <button type="button" class="btn btn-outline-danger forgot-gp-btn login-btns">Forgot</button>
+                  </div>
+               </div>
+            </form>
+            <form id="gp-forgot" style="margin-bottom: 52px; display: none;" name="user_forgot" action="javascript:void();">
+               <div class="row">
+                  <img class="logo-image" src="../images/ext_logo.png">
+               </div>
+               <div class="form-group">
+                  <label for="user-email">Email address</label>
+                  <input name="user_email" type="email" class="form-control" id="user-email-1" aria-describedby="emailHelp" placeholder="Enter email" value="">
+               </div>
+               <div class="row">
+                  <div class="col-6">
+                     <button type="button" class="btn btn-outline-primary back-gp-btn login-btns">Back</button>
+                  </div>
+                  <div class="col-6">
+                     <button type="submit" class="btn btn-outline-danger forgot-gp-btn login-btns">Forgot</button>
+                  </div>
+               </div>
+            </form>
+            <div style="position:fixed;bottom:0;font-size:12px;background-color: #494545;width:100%;text-align:center;color: white;margin-left: -15px;"> facebook.com/me </a>
+            </div>
+         </div>
+         <div style="display:none;" class="sub-container group-list">
+            <div class="row header-section">
+               <div class="col-3"> <button  class="btn btn-primary gp-poster-post setting-buttons" >Poster</button></div>
+               <div class="col-3 ">
+               </div>
+               <div class="col-3">
+                  <div class="dropdown">
+                     <button class="btn btn-secondary dropdown-toggle setting-buttons" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Category
+                     </button>
+                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item add-cat" href="#">Add category</a>
+                        <a class="dropdown-item view-cat" href="#">View Categories</a>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-3 ">
+                  <button  class="btn btn-primary gp-logout setting-buttons">Logout</button>
+               </div>
+            </div>
+            <h2 style="display: none;position: absolute; top: 43%;left: 19%;" class="group-list-0">No group found.</h2>
+            <div class="row">
+               <div class="group-list-show">
+               </div>
+            </div>
+            <hr>
+            <div style="position:fixed;bottom:0;font-size:12px;background-color: #494545;width:100%;text-align:center;color: white;margin-left: -15px;"> 2021  &#169 Group Poster | All Rights Reserved <br>  Proudly powered by <a target="_blank" href="https://www.group-poster.com" style="margin-right:10px;"> Group Poster </a>
+            </div>
+         </div>
+         <div style="display:none;" class="sub-container category-list">
+            <div class="row header-section">
+               <div class="col-3"> <button  class="btn btn-primary gp-poster-post setting-buttons" >Poster</button></div>
+               <div class="col-3">
+                  <div class="dropdown">
+                     <button class="btn btn-secondary dropdown-toggle setting-buttons" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Category
+                     </button>
+                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item add-cat" href="#">Add category</a>
+                        <a class="dropdown-item view-cat" href="#">View Categories</a>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-3 ">
+                  <div class="dropdown">
+                     <button class="btn btn-secondary dropdown-toggle setting-buttons" type="button" id="dropdownMenuButton-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Groups
+                     </button>
+                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton-1">
+                        <a class="dropdown-item gp-add-group" href="#">Add group</a>
+                        <a class="dropdown-item import-gp" href="#">Import groups</a>
+                        <a class="dropdown-item export-gp" href="#">Export groups</a>
+                        <a class="dropdown-item gp-template" href="#">Post templates</a>
+                        <a class="dropdown-item gp-change-password-outer" href="#">Change password</a>
+                     </div>
+                  </div>
+                  <!-- <button  class="btn btn-primary gp-add-group setting-buttons" >Add Group</button> -->
+               </div>
+               <div class="col-3 ">
+                  <button  class="btn btn-primary gp-logout setting-buttons">Logout</button>
+               </div>
+            </div>
+            <hr>
+            <div style="display: none;position: absolute; top: 22%;left: 11%;" class="category-0">
+               <div style="font-size:25px;" class="row">
+                  Let's get started!
+               </div>
+               <br>
+               <div class="row">
+                  1. Create your Category.
+                  <br>
+                  2. Add Group URLs into your Category.
+                  <br>
+                  3. Click on the blue Poster button, Add your<br> Post Text and Click on Start.
+                  <br><br>
+                  Then see the Magic.
+               </div>
+            </div>
+            <div class="row">
+               <div class="category-list-show">
+               </div>
+            </div>
+            <div style="position:fixed;bottom:0;font-size:12px;background-color: #494545;width:100%;text-align:center;color: white;margin-left: -15px;"> 2021  &#169 Group Poster | All Rights Reserved <br>  Proudly powered by <a target="_blank" href="https://www.group-poster.com" style="margin-right:10px;"> Group Poster </a>
+            </div>
+         </div>
+         <div style="display:none;" class="sub-container run-poster">
+            <hr>
+            <div style="margin-bottom: 30px; margin-right:20px;" class="row">
+               <form id="poster-form" style="margin-left:20px;">
+                  <div class="form-group">
+                     <label for="groupfb">Group FB:</label>
+                     <textarea placeholder="Post group" style="resize:vertical;" class="form-control" id="groupfb" cols="40" rows="5"></textarea>
+                     <label class="invalid-error invalid-credentials">This field is required.</label>
+                  </div>
+                  <div class="form-group">
+                     <label for="groupfb">Images:</label>
+                     <input type="text" id="file_upload" readonly="true" style="resize: vertical;" class="label"></div>
+                     <input type="file" style="resize:vertical; display: none;" accept="image/*" class="form-control-file" id="files" name="files" multiple="true" ></input>
+                  </div>
+                  <div class="form-group">
+                     <label for="poster">Post Content: <a href="https://www.spinrewriter.com/?ref=2ebce" target="_blank">Use spinning Text</a></label>
+                     <textarea placeholder="Post content" style="resize:none;" class="form-control" id="poster" cols="40" rows="3"></textarea>
+                     <label class="invalid-error invalid-credentials">This field is required.</label>
+                  </div>
+                  <label for="poster">Intervals (Min-Max) Seconds: </label>
+                  <div class="row">
+                     <div class="col-6">
+                        <div class="form-group">
+                           <input type="number" value="30" min="30" max="180" class="intervals min" placeholder="Min" name="min_interval">
+                        </div>
+                     </div>
+                     <div class="col-6">
+                        <div class="form-group">
+                           <input type="number" min="30" max="180" value="60" class="intervals max" placeholder="Max" name="max_interval">
+                        </div>
+                     </div>
+                  </div>
+                  <div  class="row gp-controls">
+                     <div class="col-1"></div>
+                     <div class="col-7">
+                        <button type="button" class="btn btn-outline-primary gp-a-btn start-posting">Start</button>
+                        <button type="button" class="btn btn-outline-secondary gp-a-btn pause-posting">Pause</button>
+                        <button type="button" class="btn btn-outline-danger gp-a-btn stop-posting">Stop</button>
+                        <button type="button" class="btn btn-outline-secondary gp-a-btn resume-posting">Resume</button>
+                     </div>
+                        <div class="col-4">
+                           <button type="button" class="btn btn-outline-secondary  reporting">Report</button>
+                        </div>
+                  </div>
+               </form>
+            </div>
+            <br/>
+            <div style="position:fixed;bottom:0;font-size:12px;background-color: #494545;width:100%;text-align:center;color: white;margin-left: -15px;"><a href="www.facebook.com/me">facebook.com/me </a>
+            </div>
+         </div>
+
+          <div style="display:none;" class="sub-container template-list">
+            <div class="row header-section">
+               <div class="col-3"> <button  class="btn btn-primary gp-poster-post setting-buttons" >Poster</button></div>
+               <div class="col-3">
+                  <div class="dropdown">
+                     <button class="btn btn-secondary dropdown-toggle setting-buttons" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Category
+                     </button>
+                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item add-cat" href="#">Add category</a>
+                        <a class="dropdown-item view-cat" href="#">View Categories</a>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-3 ">
+                  <div class="dropdown">
+                     <button class="btn btn-secondary dropdown-toggle setting-buttons" type="button" id="dropdownMenuButton-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Groups
+                     </button>
+                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton-1">
+                        <a class="dropdown-item gp-add-group" href="#">Add group</a>
+                        <a class="dropdown-item import-gp" href="#">Import groups</a>
+                        <a class="dropdown-item export-gp" href="#">Export groups</a>
+                        <a class="dropdown-item gp-template" href="#">Post templates</a>
+
+                     </div>
+                  </div>
+               </div>
+               <div class="col-3 ">
+                  <button  class="btn btn-primary gp-logout setting-buttons">Logout</button>
+               </div>
+            </div>
+            <hr>
+           
+            <div class="row">
+               <div style="margin-bottom:5px;" class="col-12">
+                     <div class="row">
+                     <div style="font-weight: 500;" class="col-8">Post templates</div>
+                     <div class="col-4">
+
+                           <button class="btn btn-outline-primary add-template">Add New</button>
+                       </div>
+                       <!--   <div class="col-2">
+                         </div> -->
+                  </div>
+                  </div>
+
+               </div>
+                
+                <div  class="template-0">
+                   Please add a post template
+                </div>
+             
+               <div class="col-12 template-list-show">
+
+                 
+
+
+
+               </div>
+            </div>
+            <div style="position:fixed;bottom:0;font-size:12px;background-color: #494545;width:100%;text-align:center;color: white;margin-left: -15px;"><a target="_blank" href="https://www.facebook.com/">FB</a>
+            </div>
+         </div>
+
+
+         <div style="display:none;" class="sub-container change-password">
+            <div style="margin-left:0px;" class="row header-section">
+               <div class="col-3"> <button  class="btn btn-primary gp-poster-post setting-buttons" >Poster</button></div>
+               <div class="col-3">
+                  <div class="dropdown">
+                     <button class="btn btn-secondary dropdown-toggle setting-buttons" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Category
+                     </button>
+                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item add-cat" href="#">Add category</a>
+                        <a class="dropdown-item view-cat" href="#">View Categories</a>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-3 ">
+                  <div class="dropdown">
+                     <button class="btn btn-secondary dropdown-toggle setting-buttons" type="button" id="dropdownMenuButton-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Groups
+                     </button>
+                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton-1">
+                        <a class="dropdown-item gp-add-group" href="#">Add group</a>
+                        <a class="dropdown-item import-gp" href="#">Import groups</a>
+                        <a class="dropdown-item export-gp" href="#">Export groups</a>
+                          <a class="dropdown-item gp-template" href="#">Post templates</a>
+                     </div>
+                  </div>
+                  <!-- <button  class="btn btn-primary gp-add-group setting-buttons" >Add Group</button> -->
+               </div>
+               <div class="col-3 ">
+                  <button  class="btn btn-primary gp-logout setting-buttons">Logout</button>
+               </div>
+            </div>
+            <hr>
+         
+          
+
+                 <form class="gp-c-pwd" style="margin-left: 10px; margin-right:10px;"  name="" action="javascript:void();">
+                  <div class="form-group">
+                     <label for="password">New Password</label>
+                     <input name="user_password_c" type="password" class="form-control" id="password-c" placeholder="New Password" value="">
+                  </div>
+                  <div class="row">
+                     <div class="col-6">
+                        <button type="submit" class="btn btn-outline-primary change-password-buttons">Update</button>
+                     </div>
+                  </div>
+               </form>
+
+               <div style="position:fixed;bottom:0;font-size:12px;background-color: #494545;width:100%;text-align:center;color: white;margin-left: -15px;"> facebook.com/me </a>
+               </div>
+         </div>
+
+
+
+         <div style="display:none;" class="sub-container loading-3">
+            <div class="d-flex justify-content-center">
+               <div class="spinner-border" role="status">
+                  <span class="sr-only">Loading...</span>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="snackbar">Some text some message..</div>
+
+      <!-- Modal for adding tempalte -->
+      <div id="add-new-template" class="modal" tabindex="-1" role="dialog">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title">Post template</h5>
+                  <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+
+                  <div class="form-group">
+                     <label for="cat-name">Template name:</label>
+                     <input type="text" class="form-control" name="template_name" id="template-name" placeholder="Template Name">
+                     <label class="error c-ext-errror">This field is requied</label>
+                  </div>
+
+
+                  <div class="form-group">
+                     <label for="cat-name">Post content: <a href="https://www.spinrewriter.com/?ref=2ebce">Use Spinning Text</a></label>
+                     <textarea class="form-control" placeholder="{Hi | hey | hello}, you can earn {cash|money|rupees | {fame and money} } by writing {blogs | posts}" cols="5" rows="5" id="input-post"></textarea> 
+                     <label class="error c-ext-errror">This field is requied</label>
+                  </div>
+                 
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-primary save-template-btn-ext"> Save
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary close-modal" data-dismiss="modal">Close</button>
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+      <!-- Modal for adding category -->
+      <div id="add-new-category" class="modal" tabindex="-1" role="dialog">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title">Category Form</h5>
+                  <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <div class="form-group">
+                     <label for="cat-name">Category Name:</label>
+                     <input id="cat-name" type="url" class="form-control" placeholder="Enter category name">
+                     <label class="error c-ext-errror">This field is requied</label>
+                  </div>
+                  <div class="form-group cat-for-hide">
+                     <label for="cat-for">Category for</label>
+                     <select class="form-control" id="cat-for">
+                        <option selected value="facebook">Facebook</option>
+                        <option value="linkedin">LinkedIn</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-primary save-cat-btn-ext"> Save
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary close-modal" data-dismiss="modal">Close</button>
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+        <div id="export-new-group" class="modal" tabindex="-1" role="dialog">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title">Export Groups</h5>
+                  <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <div class="form-group">
+                     <label for="cat-for">Select Category</label>
+                     <select class="form-control" id="cat-for-group-export">
+                     </select>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-primary export-group-btn-ext"> Export
+                  </button>
+                  <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Close</button>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- Modal for adding group -->
+      <div id="import-new-group" class="modal" tabindex="-1" role="dialog">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title">Import Groups</h5>
+                  <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <div class="form-group">
+                     <label for="import-file">Select text file: </label>
+                     <input type="file" name="import_file" class="form-control-file" id="import-file" >
+                  </div>
+                  <div class="form-group">
+                     <label for="cat-for">Select Category</label>
+                     <select class="form-control" id="cat-for-group-import">
+                     </select>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-primary import-group-btn-ext"> Save
+                  </button>
+                  <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Close</button>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Modal for adding group -->
+      <div id="add-new-group" class="modal" tabindex="-1" role="dialog">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title">Add group</h5>
+                  <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <div class="form-group">
+                     <label for="exampleFormControlTextarea12">Group Url:</label>
+                     <input id="group-url" type="url" class="form-control" placeholder="Enter group url">
+                     <label class="error c-ext-errror">This field is requied</label>
+                  </div>
+                  <div class="form-group">
+                     <label for="cat-for">Select Category</label>
+                     <select class="form-control" id="cat-for-group">
+                     </select>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-primary save-group-btn-ext"> Save
+                  </button>
+                  <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Close</button>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Modal for adding group -->
+      <div style="top:20%;" id="group-delete-modal" class="modal" tabindex="-1" role="dialog">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title">Are you sure you want to delete ?</h5>
+                  <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" data-group-id="0" class="btn btn-danger group-delete-btn">Yes</button>
+                  <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">No</button>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Modal for adding group -->
+      <div style="top:20%;" id="cat-delete-modal" class="modal" tabindex="-1" role="dialog">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title">Are you sure you want to delete ?</h5>
+                  <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" data-group-id="0" class="btn btn-danger cat-delete-btn">Yes</button>
+                  <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">No</button>
+               </div>
+            </div>
+         </div>
+      </div>
+
+       <!-- Modal for delete template -->
+      <div style="top:20%;" id="template-delete-modal" class="modal" tabindex="-1" role="dialog">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title">Are you sure you want to delete ?</h5>
+                  <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" data-group-id="0" class="btn btn-danger template-delete-btn">Yes</button>
+                  <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">No</button>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <script src="../js/jquery.validate.js"></script>
+     
+      <script src="../js/variables.js"></script>
+      <script src="../js/popup.js"></script>
+   </body>
+</html>
